@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        // Find the lexicographically smallest word that could have been encoded
+        for (char a = 'a'; a <= 'z'; ++a) {
+            for (char b = 'a'; b <= 'z'; ++b) {
+                for (char c = 'a'; c <= 'z'; ++c) {
+                    int sum = (a - 'a' + 1) + (b - 'a' + 1) + (c - 'a' + 1);
+                    if (sum == n) {
+                        cout << a << b << c << endl;
+                        // Terminate the loops once we find the word
+                        a = 'z' + 1;
+                        b = 'z' + 1;
+                        c = 'z' + 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+
+----------OR----------
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+
+    int rem = max(n - (26 * 2), 1);
+    cout << char('a' + rem - 1) << "";
+    n -= rem;
+
+    rem = max(1, n - 26);
+    cout << char('a' + rem - 1) << "";
+    n -= rem;
+
+    cout << char('a' + n - 1) << "\n";
+}
+
+int main() {
+    int tests = 1;
+    cin >> tests;
+    while (tests--) {
+        solve();
+    }
+    return 0;
+}
+
+
+----------OR----------
+
+
+#include <iostream>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    int a;
+    string s;
+    while(t--){
+        cin>>a;
+        if(a<=28)
+        {
+            s[0]=97;
+            s[1]=97;
+            s[2]=97+(a-3);
+            cout<<s[0]<<s[1]<<s[2]<<endl;
+        }
+        else if(a>=29 && a<=53)
+        {
+            s[0]=97;
+            s[2]=122;
+            s[1]=97+(a-28);
+            cout<<s[0]<<s[1]<<s[2]<<endl;
+        }
+        else
+        {
+            s[1]=122;
+            s[2]=122;
+            s[0]=97+(a-53);
+            cout<<s[0]<<s[1]<<s[2]<<endl;
+        }
+    }
+    return 0;
+}

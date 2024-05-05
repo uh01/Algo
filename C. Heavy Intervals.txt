@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N], b[N], c[N], p[N];
+int stk[N];
+
+void solve() 
+{
+    int n;
+    scanf("%d", &n);
+    
+    for (int i = 0; i < n; i++) 
+    {
+        scanf("%d", a + i);
+    }
+    for (int i = 0; i < n; i++) 
+    {
+        scanf("%d", b + i);
+    }
+    for (int i = 0; i < n; i++) 
+    {
+        scanf("%d", c + i);
+    }
+    
+    sort(a, a + n);
+    sort(b, b + n);
+    sort(c, c + n);
+    
+    for (int i = 0, j = 0, k = 0, tp = 0; k < n; ) 
+    {
+        if (i < n && a[i] < b[j])
+        { 
+            stk[++tp] = a[i++];
+        }
+        else 
+        {   
+            p[k++] = b[j++] - stk[tp--];
+        }
+    }
+    
+    sort(p, p + n, greater<int>());
+    
+    long long ret = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        ret += (long long) p[i] * c[i];
+    }
+    
+    printf("%lld\n", ret);
+}
+
+int main() 
+{
+    int t;
+    scanf("%d", &t);
+    
+    while (t--) 
+    {
+        solve();
+    }
+    
+    return 0;
+}
